@@ -8,7 +8,9 @@ function getTodos(res) {
 }
 
 module.exports = (app) => {
-  app.get('/api/todos', getTodos)
+  app.get('/api/todos', (req, res) => {
+    getTodos(res)
+  })
 
   app.post('/api/todos', (req, res) => {
     Todo.create({

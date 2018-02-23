@@ -1,9 +1,10 @@
 const express = require('express')
 const mongoose = require('mongoose')
-const database = require('./config/database')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
+
+const database = require('./config/database')
 
 const app = express()
 const port = process.env.PORT || 8080
