@@ -32,6 +32,6 @@ module.exports = (app) => {
   })
 
   app.get('*', (req, res) => {
-    res.sendFile(require('path').join(__dirname, '/public/index.html'))
+    res.sendFile(require('path').resolve('./public/index.html'))
   })
 }
