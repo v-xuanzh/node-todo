@@ -9,7 +9,7 @@ const database = require('./config/database')
 const app = express()
 const port = process.env.PORT || 8080
 
-mongoose.connect(database.localUrl)
+mongoose.connect(database.connection)
 mongoose.connection.on('error', console.log.bind(console, 'Mongo Error:'))
 
 app.use(express.static('./public'))

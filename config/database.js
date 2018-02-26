@@ -1,4 +1,1 @@
-module.exports = {
-    remoteUrl : process.env.MONGO_URL,
-    localUrl: 'mongodb://localhost/todo'
-};
+exports.connection = process.env.MONGO_URL || 'mongodb://localhost/todo'
