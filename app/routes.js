@@ -1,34 +1,22 @@
-const Todo = require('./models/todo')
+module.exports = async (app) => {
+  const Todo = await require('./models/todo')()
 
-function getTodos(res) {
-  Todo.find((err, todos) => {
-    if (err) return res.send(err)
-    res.json(todos)
-  })
-}
-
-module.exports = (app) => {
-  app.get('/api/todos', (req, res) => {
-    getTodos(res)
+  app.get('/api/todos', async (req, res) => {
+    res.json(await Todo.find())
   })
 
-  app.post('/api/todos', (req, res) => {
-    Todo.create({
+  app.post('/api/todos', async (req, res) => {
+    await Todo.create({
       text: req.body.text,
       done: false
-    }, (err, todo) => {
-      if (err) return res.send(err)
-      getTodos(res)
     })
+
+    res.json(await Todo.find())
   })
 
-  app.delete('/api/todos/:todo_id', (req, res) => {
-    Todo.remove({
-      _id: req.params.todo_id
-    }, (err, todo) => {
-      if (err) return res.send(err)
-      getTodos(res)
-    })
+  app.delete('/api/todos/:todo_id', async (req, res) => {
+    await Todo.remove({ id: req.params.todo_id })
+    res.json(await Todo.find())
   })
 
   app.get('*', (req, res) => {
